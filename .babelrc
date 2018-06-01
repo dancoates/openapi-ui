@@ -1,0 +1,16 @@
+{
+    "presets": [
+        ["babel-preset-env", {
+            "targets": {
+              "browsers": ["last 2 versions"]
+            }
+        }],
+        "react"
+    ],
+    "plugins": [
+        "react-hot-loader/babel",
+        "transform-object-rest-spread",
+        "transform-class-properties",
+        "transform-flow-strip-types"
+    ]
+}
