@@ -1,0 +1,16 @@
+Layout
+    - LayoutProps
+Structures
+Affordances
+
+
+OpenApiObjectUiStructure
+    - gets props off object and provides them to default layout
+
+OpenApiObjectUiLayout
+    - layoutProps
+        - info
+
+
+
+Create structure, layout and affordance HOCs?

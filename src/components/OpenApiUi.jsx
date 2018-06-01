@@ -1,8 +1,9 @@
 // @flow
 import React from 'react';
 import SwaggerParser from 'swagger-parser';
+import AsyncModuleComponent from './AsyncModuleComponent';
+
 import type {OpenApiObject} from '../types/OpenApiSchema';
-import OpenApiObjectUi from './OpenApiObjectUi';
 
 type Props = {
     api: string
@@ -11,7 +12,7 @@ type Props = {
 type State = {
     schema?: ?OpenApiObject
 };
-
+// @TODO turn this into a HOC
 export default class OpenApiUi extends React.Component<Props, State> {
 
     state: State = {};
@@ -36,7 +37,9 @@ export default class OpenApiUi extends React.Component<Props, State> {
 
     render(): * {
         if(this.state.schema) {
+            const OpenApiObjectUi = AsyncModuleComponent('./OpenApiObjectUi');
             return <OpenApiObjectUi schema={this.state.schema}/>;
+
         } else {
             return <div>loading...</div>;
         }

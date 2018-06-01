@@ -8,12 +8,21 @@ type Props = {
     schema: OpenApiObject
 };
 
+// @TODO
+// - safelink the TOS
+
 export default class OpenApiUi extends React.Component<Props, void> {
     render(): * {
         const {schema} = this.props;
+        const {info} = this.props;
 
         return <div>
-            Info
+            <h1>{info.title} <small>OAS {schema.openapi}</small></h1>
+
+            {info.description && <p>{info.description}</p>}
+            {info.termsOfService && <a href={info.termsOfService}>{info.termsOfService}</a>}
+            {info.contact && <a href={info.termsOfService}>{info.termsOfService}</a>}
+
         </div>;
     }
 }
