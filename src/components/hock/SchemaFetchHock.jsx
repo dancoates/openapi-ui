@@ -1,8 +1,8 @@
 // @flow
 import SwaggerParser from "swagger-parser";
 import React from "react";
-import type { ComponentType } from "react";
-import type { OpenApiObject } from "../../types/OpenApiSchema";
+import type {ComponentType} from "react";
+import type {OpenApiObject} from "../../types/OpenApiSchema";
 
 type State = {
     schema?: ?OpenApiObject
@@ -11,14 +11,14 @@ type State = {
 export default function schemaFetch<Props: {}>(
     url: string
 ): (
-    RenderComponent: ComponentType<$Diff<Props, { schema: OpenApiObject | void }>>,
+    RenderComponent: ComponentType<$Diff<Props, {schema: OpenApiObject | void}>>,
     LoaderComponent: ComponentType<Props>
 ) => ComponentType<Props> {
     return (
-        RenderComponent: ComponentType<$Diff<Props, { schema: OpenApiObject | void }>>,
+        RenderComponent: ComponentType<$Diff<Props, {schema: OpenApiObject | void}>>,
         LoaderComponent: ComponentType<Props>
     ): ComponentType<Props> => {
-        class Fetcher extends React.Component<Props> {
+        class Fetcher extends React.Component<Props, State> {
             state: State = {
                 schema: null
             };
@@ -29,11 +29,11 @@ export default function schemaFetch<Props: {}>(
 
             fetchSchema(api: string) {
                 SwaggerParser.validate(api).then((schema: OpenApiObject) => {
-                    this.setState({ schema });
+                    this.setState({schema});
                 });
             }
 
-            render(): * {
+            render() {
                 if (this.state.schema) {
                     return <RenderComponent {...this.props} schema={this.state.schema} />;
                 } else {

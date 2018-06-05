@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "watch": "parcel ./src/index.html",
-    "pretty": "prettier ./src"
+    "pretty": "prettier ./src/**/*.js ./src/**/*.jsx --write"
   },
   "dependencies": {
     "react": "^16.4.0",

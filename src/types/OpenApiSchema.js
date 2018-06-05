@@ -12,7 +12,6 @@ export type InfoObject = {
     contact?: ContactObject
 };
 
-
 export type ContactObject = {
     name?: string,
     url?: string,

@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
-import type { OpenApiObject } from "../types/OpenApiSchema";
-import type { InfoObject } from "../types/OpenApiSchema";
+import type {OpenApiObject} from "../types/OpenApiSchema";
+import type {InfoObject} from "../types/OpenApiSchema";
 
 type Props = {
     info: InfoObject,
@@ -13,8 +13,8 @@ type Props = {
 
 export default class OpenApiUi extends React.Component<Props, void> {
     render(): * {
-        const { schema } = this.props;
-        const { info } = this.props;
+        const {schema} = this.props;
+        const {info} = this.props;
 
         return (
             <div>
