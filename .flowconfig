@@ -1,12 +1,11 @@
-[options]
-module.system.node.resolve_dirname=src
-module.system.node.resolve_dirname=node_modules
-unsafe.enable_getters_and_setters=true
-module.file_ext=.js
-module.file_ext=.jsx
-module.file_ext=.json
-suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
-
-
 [ignore]
-<PROJECT_ROOT>/dist/.*
+
+[include]
+
+[libs]
+
+[lints]
+all=error
+[options]
+
+[strict]

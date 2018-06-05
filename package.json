@@ -6,7 +6,8 @@
   "author": "Dan Coates <mail@dancoat.es>",
   "license": "MIT",
   "scripts": {
-    "watch": "parcel ./src/index.html"
+    "watch": "parcel ./src/index.html",
+    "pretty": "prettier ./src"
   },
   "dependencies": {
     "react": "^16.4.0",
@@ -20,7 +21,8 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "blueflag-test": "^0.18.1",
-    "parcel-bundler": "^1.8.1"
+    "flow-bin": "^0.73.0",
+    "parcel-bundler": "^1.8.1",
+    "prettier": "1.13.4"
   }
 }

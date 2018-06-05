@@ -4,9 +4,17 @@ import ReactDom from 'react-dom';
 
 function renderApp() {
     const OpenApiUi = require('./components/OpenApiUi').default;
+    const SchemaFetchHock = require('./components/hock/SchemaFetchHock').default;
+    const url = "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml";
+    const Loader = () => <div>loading</div>;
+    const OpenApiUiWithSchema = SchemaFetchHock(url)(OpenApiUi, Loader);
+
+    const app = document.getElementById('app');
+    if(!app) return;
+
     ReactDom.render(
-        <OpenApiUi api="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore-expanded.yaml"/>,
-        document.getElementById('app')
+        <OpenApiUiWithSchema/>,
+        app
     );
 }
 

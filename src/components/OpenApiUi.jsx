@@ -1,47 +1,13 @@
 // @flow
-import React from 'react';
-import SwaggerParser from 'swagger-parser';
-import AsyncModuleComponent from './AsyncModuleComponent';
+import React from "react";
 
-import type {OpenApiObject} from '../types/OpenApiSchema';
+import type { OpenApiObject } from "../types/OpenApiSchema";
 
 type Props = {
-    api: string
+    schema: OpenApiObject
 };
 
-type State = {
-    schema?: ?OpenApiObject
-};
-// @TODO turn this into a HOC
-export default class OpenApiUi extends React.Component<Props, State> {
-
-    state: State = {};
-
-    componentDidMount() {
-        const {api} = this.props;
-        this.fetchSchema(api);
-    }
-
-    componentDidUpdate(prevProps: Props) {
-        if(prevProps.api !== this.props.api) {
-            this.fetchSchema(this.props.api);
-        }
-    }
-
-    fetchSchema(api: string) {
-        SwaggerParser.validate(api)
-            .then((schema: OpenApiObject) => {
-                this.setState({schema});
-            });
-    }
-
-    render(): * {
-        if(this.state.schema) {
-            const OpenApiObjectUi = AsyncModuleComponent('./OpenApiObjectUi');
-            return <OpenApiObjectUi schema={this.state.schema}/>;
-
-        } else {
-            return <div>loading...</div>;
-        }
-    }
+export default function(props: Props) {
+    console.log(props);
+    return <div>woot</div>;
 }
