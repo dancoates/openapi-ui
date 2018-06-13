@@ -1,28 +1,30 @@
 {
-  "name": "openapi-ui",
-  "version": "0.0.0",
-  "description": "UI Generator for The OpenAPI Specification (^3.0.0)",
-  "main": "index.js",
-  "author": "Dan Coates <mail@dancoat.es>",
-  "license": "MIT",
-  "scripts": {
-    "watch": "parcel ./src/index.html",
-    "pretty": "prettier ./src/**/*.js ./src/**/*.jsx --write"
-  },
-  "dependencies": {
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
-    "react-hot-loader": "^4.2.0",
-    "swagger-parser": "^5.0.0"
-  },
-  "devDependencies": {
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "flow-bin": "^0.73.0",
-    "parcel-bundler": "^1.8.1",
-    "prettier": "1.13.4"
-  }
+    "name": "openapi-ui",
+    "version": "0.0.0",
+    "description": "UI Generator for The OpenAPI Specification (^3.0.0)",
+    "main": "index.js",
+    "author": "Dan Coates <mail@dancoat.es>",
+    "license": "MIT",
+    "scripts": {
+        "watch": "parcel ./src/index.html",
+        "precommit": "pretty-quick --staged"
+    },
+    "dependencies": {
+        "react": "^16.4.0",
+        "react-dom": "^16.4.0",
+        "react-hot-loader": "^4.2.0",
+        "swagger-parser": "^5.0.0"
+    },
+    "devDependencies": {
+        "babel-plugin-transform-class-properties": "^6.24.1",
+        "babel-plugin-transform-flow-strip-types": "^6.22.0",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-react": "^6.24.1",
+        "flow-bin": "^0.73.0",
+        "husky": "^0.14.3",
+        "parcel-bundler": "^1.8.1",
+        "prettier": "1.13.4",
+        "pretty-quick": "^1.6.0"
+    }
 }

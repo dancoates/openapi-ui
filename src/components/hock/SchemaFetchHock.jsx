@@ -11,11 +11,11 @@ type State = {
 export default function schemaFetch<Props: {}>(
     url: string
 ): (
-    RenderComponent: ComponentType<$Diff<Props, {schema: OpenApiObject | void}>>,
+    RenderComponent: ComponentType<Props & {schema: OpenApiObject}>,
     LoaderComponent: ComponentType<Props>
 ) => ComponentType<Props> {
     return (
-        RenderComponent: ComponentType<$Diff<Props, {schema: OpenApiObject | void}>>,
+        RenderComponent: ComponentType<Props & {schema: OpenApiObject}>,
         LoaderComponent: ComponentType<Props>
     ): ComponentType<Props> => {
         class Fetcher extends React.Component<Props, State> {
