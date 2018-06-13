@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default class OpenApiObjectUi extends React.Component<Props, void> {
-    render(): * {
+    render() {
         const {schema} = this.props;
 
         return <div>{schema.info && <InfoObjectUi schema={schema} info={schema.info} />}</div>;

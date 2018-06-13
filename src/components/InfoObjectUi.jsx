@@ -12,7 +12,7 @@ type Props = {
 // - safelink the TOS
 
 export default class OpenApiUi extends React.Component<Props, void> {
-    render(): * {
+    render() {
         const {schema} = this.props;
         const {info} = this.props;
 

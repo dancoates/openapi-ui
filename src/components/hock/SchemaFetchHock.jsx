@@ -2,42 +2,47 @@
 import SwaggerParser from "swagger-parser";
 import React from "react";
 import type {ComponentType} from "react";
+import type {ElementConfig} from "react";
 import type {OpenApiObject} from "../../types/OpenApiSchema";
 
 type State = {
     schema?: ?OpenApiObject
 };
-
-export default function schemaFetch<Props: {}>(
+// @TODO move loader into options
+export default function schemaFetch<Props: {}, Component: ComponentType<Props>>(
     url: string
 ): (
-    RenderComponent: ComponentType<Props & {schema: OpenApiObject}>,
-    LoaderComponent: ComponentType<Props>
-) => ComponentType<Props> {
+    ComposedComponent: Component
+) => ComponentType<$Diff<ElementConfig<Component>, {schema: OpenApiObject | void}>> {
     return (
-        RenderComponent: ComponentType<Props & {schema: OpenApiObject}>,
-        LoaderComponent: ComponentType<Props>
-    ): ComponentType<Props> => {
+        ComposedComponent: Component
+    ): ComponentType<$Diff<ElementConfig<Component>, {schema: OpenApiObject | void}>> => {
         class Fetcher extends React.Component<Props, State> {
             state: State = {
                 schema: null
             };
 
+            cancelFetch: boolean = false;
+
             componentDidMount() {
                 this.fetchSchema(url);
             }
 
+            componentWillUnmount() {
+                this.cancelFetch = true;
+            }
+
             fetchSchema(api: string) {
                 SwaggerParser.validate(api).then((schema: OpenApiObject) => {
-                    this.setState({schema});
+                    if (!this.cancelFetch) this.setState({schema});
                 });
             }
 
             render() {
                 if (this.state.schema) {
-                    return <RenderComponent {...this.props} schema={this.state.schema} />;
+                    return <ComposedComponent {...this.props} schema={this.state.schema} />;
                 } else {
-                    return <LoaderComponent {...this.props} />;
+                    return <div>loading schema</div>;
                 }
             }
         }
@@ -45,3 +50,5 @@ export default function schemaFetch<Props: {}>(
         return Fetcher;
     };
 }
+
+//

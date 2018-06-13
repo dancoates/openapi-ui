@@ -11,7 +11,7 @@ type Props = {
 // @TODO
 
 export default class OpenApiUi extends React.Component<Props, void> {
-    render(): * {
+    render() {
         const {schema} = this.props;
         const {contact} = this.props;
 
