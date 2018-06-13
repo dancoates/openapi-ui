@@ -35,7 +35,8 @@ export default class OpenApiUi extends React.Component<Props> {
     render() {
         const {schema} = this.props;
         const {theme} = this.props;
-
+        console.log("SCHEMA", schema);
+        console.log("THEME", theme);
         return (
             <OpenApiUiContext.Provider value={{schema, theme}}>
                 <ThemedOpenApiUi />
