@@ -8,6 +8,11 @@ export type OpenApiUiTheme = {
     affordance: {[key: string]: string}
 };
 
+type SharedProps = {
+    schema: OpenApiObject,
+    theme: OpenApiUiTheme
+};
+
 export type OpenApiUiThemeStructure = {
-    OpenApiObjectStructure: Promise<ComponentType<{schemaField: OpenApiObject}>>
+    OpenApiObjectStructure: () => Promise<ComponentType<{schemaField: OpenApiObject} & SharedProps>>
 };

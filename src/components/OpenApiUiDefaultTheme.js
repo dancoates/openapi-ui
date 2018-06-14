@@ -1,7 +1,8 @@
 // @flow
 export default {
     structure: {
-        OpenApiObjectStructure: Promise.resolve(import("./structure/OpenApiObjectStructure"))
+        OpenApiObjectStructure: () =>
+            import("./structure/OpenApiObjectStructure").then(ii => ii.default)
     },
     layout: {},
     affordance: {}
