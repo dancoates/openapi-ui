@@ -2,6 +2,8 @@
 import React from "react";
 import ReactDom from "react-dom";
 import type {OpenApiObject} from "./types/OpenApiSchema";
+import OpenApiUiContext from "./components/OpenApiUiContext";
+import OpenApiUiDefaultTheme from "./components/OpenApiUiDefaultTheme";
 function renderApp() {
     const OpenApiUi = require("./components/OpenApiUi").default;
     const SchemaFetchHock = require("./components/hock/SchemaFetchHock").default;
@@ -12,7 +14,12 @@ function renderApp() {
     const app = document.getElementById("app");
     if (!app) return;
 
-    ReactDom.render(<OpenApiUiWithSchema />, app);
+    ReactDom.render(
+        <OpenApiUiContext.Provider value={{theme: OpenApiUiDefaultTheme}}>
+            <OpenApiUiWithSchema />
+        </OpenApiUiContext.Provider>,
+        app
+    );
 }
 
 renderApp();

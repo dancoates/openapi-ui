@@ -50,5 +50,3 @@ export default function schemaFetch<Props: {}, Component: ComponentType<Props>>(
         return Fetcher;
     };
 }
-
-//
