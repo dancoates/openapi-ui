@@ -8,6 +8,7 @@
 all=error
 untyped-import=off
 sketchy-null-string=off
+deprecated-type=off
 [options]
 
 [strict]

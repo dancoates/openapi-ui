@@ -13,11 +13,11 @@ type StyleList =
 export type OpenApiObject = {
     openapi: string,
     info: InfoObject,
-    servers?: Array<ServerObject>,
-    paths: {[key: string]: PathItemObject},
+    servers?: ServerObjectList,
+    paths: PathItemObjectMap,
     components?: ComponentsObject,
-    security?: Array<SecurityRequirementObject>,
-    tags?: Array<TagObject>,
+    security?: SecurityRequirementObjectList,
+    tags?: TagObjectList,
     externalDocs?: ExternalDocumentationObject
 };
 
@@ -41,17 +41,23 @@ export type LicenseObject = {
     url?: string
 };
 
+export type ServerObjectList = Array<ServerObject>;
+
 export type ServerObject = {
     url: string,
     description?: string,
-    variables?: {[key: string]: ServerVariableObject}
+    variables?: ServerVariableObjectMap
 };
+
+export type ServerVariableObjectMap = {[key: string]: ServerVariableObject};
 
 export type ServerVariableObject = {
     enum?: Array<string>,
     default: string,
     description?: string
 };
+
+export type PathItemObjectMap = {[key: string]: PathItemObject};
 
 export type PathItemObject = {
     summary?: string,
@@ -74,14 +80,17 @@ export type OperationObject = {
     description?: string,
     externalDocs?: ExternalDocumentationObject,
     operationId?: string,
-    parameters?: Array<ParameterObject>,
+    parameters?: ParameterObjectList,
     requestBody?: RequestBodyObject,
     responses: ResponsesObject,
-    callbacks?: {[key: string]: CallbackObject},
+    callbacks?: CallbackObjectMap,
     deprecated?: boolean,
-    security?: Array<SecurityRequirementObject>,
-    servers?: Array<ServerObject>
+    security?: SecurityRequirementObjectList,
+    servers?: ServerObjectList
 };
+
+export type ParameterObjectList = Array<ParameterObject>;
+export type ParameterObjectMap = {[key: string]: ParameterObject};
 
 export type ParameterObject = {
     name: string,
@@ -102,14 +111,14 @@ export type ParameterObject = {
     // Either content or schema/style must be defined, but not both
     (
         | {
-              content: {[key: string]: MediaTypeObject}
+              content: MediaTypeObjectMap
           }
         | {
               schema: SchemaObject,
               style: StyleList,
               allowReserved?: boolean,
               example?: JSON,
-              examples?: {[string]: ExampleObject}
+              examples?: ExampleObjectMap
           }
     );
 
@@ -117,6 +126,8 @@ export type ExternalDocumentationObject = {
     description?: string,
     url: string
 };
+
+export type SchemaObjectMap = {[key: string]: SchemaObject};
 
 export type SchemaObject = {
     title?: string,
@@ -141,8 +152,8 @@ export type SchemaObject = {
     anyOf?: Array<SchemaObject>,
     not?: SchemaObject,
     items?: SchemaObject,
-    properties?: {[key: string]: SchemaObject},
-    additionalProperties?: boolean | {[key: string]: SchemaObject},
+    properties?: SchemaObjectMap,
+    additionalProperties?: boolean | SchemaObjectMap,
     description?: string,
     format?: string,
     default?: JSON,
@@ -156,6 +167,8 @@ export type SchemaObject = {
     deprecated?: boolean
 };
 
+export type ExampleObjectMap = {[string]: ExampleObject};
+
 export type ExampleObject = {
     summary?: string,
     description?: string,
@@ -163,11 +176,13 @@ export type ExampleObject = {
     externalValue?: string
 };
 
+export type MediaTypeObjectMap = {[key: string]: MediaTypeObject};
+
 export type MediaTypeObject = {
     schema?: SchemaObject,
     example?: JSON,
-    examples?: {[key: string]: ExampleObject},
-    encoding?: {[key: string]: EncodingObject}
+    examples?: ExampleObjectMap,
+    encoding?: EncodingObjectMap
 };
 
 export type DiscriminatorObject = {
@@ -183,13 +198,17 @@ export type XMLObject = {
     wrapped?: boolean
 };
 
+export type EncodingObjectMap = {[key: string]: EncodingObject};
+
 export type EncodingObject = {
     contentType?: string,
-    headers?: {[key: string]: HeaderObject},
+    headers?: HeaderObjectMap,
     style?: string,
     explode?: boolean,
     allowReserved?: boolean
 };
+
+export type HeaderObjectMap = {[key: string]: HeaderObject};
 
 export type HeaderObject = {
     description?: string,
@@ -198,32 +217,36 @@ export type HeaderObject = {
     required?: boolean
 } & ( // Either content or schema/style must be defined, but not both
     | {
-          content: {[key: string]: MediaTypeObject}
+          content: MediaTypeObjectMap
       }
     | {
           schema: SchemaObject,
           style: StyleList,
           allowReserved?: boolean,
           example?: JSON,
-          examples?: {[string]: ExampleObject}
+          examples?: ExampleObjectMap
       }
 );
 
 export type ComponentsObject = {
-    schemas?: {[key: string]: SchemaObject},
-    responses?: {[key: string]: ResponseObject},
-    parameters?: {[key: string]: ParameterObject},
-    examples?: {[key: string]: ExampleObject},
-    requestBodies?: {[key: string]: RequestBodyObject},
-    headers?: {[key: string]: HeaderObject},
-    securitySchemes?: {[key: string]: SecuritySchemeObject},
-    links?: {[key: string]: LinkObject},
-    callbacks?: {[key: string]: CallbackObject}
+    schemas?: SchemaObjectMap,
+    responses?: ResponseObjectMap,
+    parameters?: ParameterObjectMap,
+    examples?: ExampleObjectMap,
+    requestBodies?: RequestBodyObjectMap,
+    headers?: HeaderObjectMap,
+    securitySchemes?: SecuritySchemeObjectMap,
+    links?: LinkObjectMap,
+    callbacks?: CallbackObjectMap
 };
+
+export type SecurityRequirementObjectList = Array<SecurityRequirementObject>;
 
 export type SecurityRequirementObject = {
     [key: string]: Array<string>
 };
+
+export type TagObjectList = Array<TagObject>;
 
 export type TagObject = {
     name: string,
@@ -231,11 +254,15 @@ export type TagObject = {
     externalDocs?: ExternalDocumentationObject
 };
 
+export type RequestBodyObjectMap = {[key: string]: RequestBodyObject};
+
 export type RequestBodyObject = {
     description?: string,
-    content: {[key: string]: MediaTypeObject},
+    content: MediaTypeObjectMap,
     required?: boolean
 };
+
+export type ResponseObjectMap = {[key: string]: ResponseObject};
 
 export type ResponsesObject = {
     default?: ResponseObject,
@@ -244,10 +271,12 @@ export type ResponsesObject = {
 
 export type ResponseObject = {
     description: string,
-    headers?: {[key: string]: HeaderObject},
-    content?: {[key: string]: MediaTypeObject},
-    links?: {[key: string]: LinkObject}
+    headers?: HeaderObjectMap,
+    content?: MediaTypeObjectMap,
+    links?: LinkObjectMap
 };
+
+export type LinkObjectMap = {[key: string]: LinkObject};
 
 export type LinkObject = {
     operationRef?: string,
@@ -258,9 +287,13 @@ export type LinkObject = {
     server?: ServerObject
 };
 
+export type CallbackObjectMap = {[key: string]: CallbackObject};
+
 export type CallbackObject = {
     [expression: string]: PathItemObject
 };
+
+export type SecuritySchemeObjectMap = {[key: string]: SecuritySchemeObject};
 
 export type SecuritySchemeObject = {
     description?: string
