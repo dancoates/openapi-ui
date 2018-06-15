@@ -18,7 +18,7 @@ export default class OpenApiUi extends React.Component<Props> {
     render() {
         const {schema} = this.props;
         const {theme} = this.props;
-
+        console.log(schema);
         const OpenApiObjectStructure = AsyncRenderHock({
             loader: () => <div>Loading component</div>
         })(theme.structure.OpenApiObjectStructure);
